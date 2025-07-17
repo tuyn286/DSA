@@ -23,7 +23,7 @@ class Solution {
             // phải kiểm tra .next.next trước để tránh null pointer
             if (doubleS.next.next == null || doubleS.next.next.next == null){
                 // doubleS kề cuối thì middle đứng sau normal
-                ListNode middleNode = doubleS.next != null ? normalS.next : normalS;
+                ListNode middleNode = normalS.next;
                 normalS.next = middleNode.next; // nhảy cóc qua middle
                 middleNode.next = null; // cắt quan hệ middle
                 return head;
