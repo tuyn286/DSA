@@ -1,35 +1,26 @@
 class Solution {
     public boolean closeStrings(String word1, String word2) {
-        if (word1.length() != word2.length()){
-            return false;
-        }
-        Map<Character, Integer> map1 = new HashMap<>();
-        Map<Character, Integer> map2 = new HashMap<>();
+        // phải sử dụng mảng: index chính là kí tự từ 0 - 26
+        int[] arr1 = new int[26];
+        int[] arr2 = new int[26];
         for (char c : word1.toCharArray()){
-            map1.put(c, map1.getOrDefault(c, 0) + 1);
+            arr1[c - 'a'] += 1;
         }
         for (char c : word2.toCharArray()){
-            map2.put(c, map2.getOrDefault(c, 0) + 1);
+            arr2[c - 'a'] += 1;
         }
-        // cac ki tu xuat hien trong 2 chuoi phai giong nhau
-        for (char c : map1.keySet()){
-            if (!map2.containsKey(c)){
+
+        for (int i = 0; i < 26; i++){
+            // neu ki tu co o 1 khong co o 2 thi false
+            if ((arr1[i] == 0 && arr2[i] > 0) || (arr1[i] > 0 && arr2[i] == 0) ){
                 return false;
             }
         }
-        // tan suat xuat hien phai giong nhau
-        // tan suat cua bat ki ki tu nao
-        List<Integer> value1 = new ArrayList<>(map1.values());
-        Collections.sort(value1);
-        System.out.println(value1);
-        List<Integer> value2 = new ArrayList<>(map2.values());
-        System.out.println(value2);
-        Collections.sort(value2);
-        for (int i = 0; i < value1.size(); i++){
-            if (value1.get(i).intValue() != value2.get(i).intValue()){
-                return false;
-            }
-        }
-        return true;
+        // sap xep tan suat tu be den lon
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        // so sanh tan suat
+        return Arrays.equals(arr1, arr2);
     }
 }
