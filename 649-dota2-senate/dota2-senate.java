@@ -16,14 +16,14 @@ class Solution {
         while (radQueue.size() != 0 && direQueue.size() != 0){
             // neu co index nho hon thi loai duoc doi thu ben phai
             if (radQueue.peek() < direQueue.peek()){
-                // loai doi thu
-                direQueue.poll();
                 // cho no vao lai voi index hon 1 vong
-                radQueue.add(radQueue.poll() + n);
+                radQueue.add(n++);
             } else {
-                radQueue.poll();
-                direQueue.add(direQueue.poll() + n);
+                direQueue.add(n++);
             }
+            // sau khi tham gia thì cả 2 đều mất; bên nào thắng thì được đưa vào queue
+            direQueue.poll();
+            radQueue.poll();
         }
         // khi da co 1 phe het so luong
         if (radQueue.size() == 0){
