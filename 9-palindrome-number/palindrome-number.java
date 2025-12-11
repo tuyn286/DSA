@@ -1,17 +1,15 @@
 class Solution {
     public boolean isPalindrome(int x) {
+        int temp = x;
         if (x < 0){
             return false;
         }
-
-        List<Integer> list = new ArrayList();
+        int revert = 0;
         while (x > 0) {
-            int unit = x%10;
-            list.add(unit);
-            x = x/10;
+            revert = revert*10 + x%10;
+            x/=10;
         }
 
-        List<Integer> revert = list.reversed();
-        return revert.equals(list);
+        return revert == temp;
     }
 }
